@@ -1,23 +1,26 @@
 import React from 'react';
 
-import { currentAccount } from '../../index';
 import { Link } from 'react-router-dom';
+import { globalContext } from '../../globalcontext';
 
 type Props = {
 }
 
 class AccountStatus extends React.Component {
+    static updater: (callback?: (() => void) | undefined) => void;
 
     constructor(props: Props) {
         super(props);
         this.state = { display: "Sign In" };
 
+        AccountStatus.updater = () => { super.forceUpdate() };
         this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(event: Event) {
+    handleClick() {
         console.log("Clicked");
         this.setState({ display: "Clicked" })
+        this.toLogin()
     }
 
     toLogin() {
@@ -26,10 +29,11 @@ class AccountStatus extends React.Component {
     }
 
     render() {
-        if (currentAccount == null) {
+        if (globalContext.currentAccount.email === "not_signed_in") {
             return (<Link to="login">Sign In</Link>);
+        } else {
+            return (<div>{globalContext.currentAccount.email}</div>);
         }
-        return (<div>Already In</div>);
     }
 }
 

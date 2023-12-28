@@ -2,6 +2,15 @@ import React from 'react';
 
 import { ErrorMessage } from './components/errormessage';
 import Error, { ErrorLevel } from "../model/error";
+import Account from '../model/account';
+
+import Axios from 'axios'
+
+
+
+import { setContext } from '../globalcontext'
+import AccountStatus from './components/accountstatus';
+import { Navigate } from 'react-router-dom';
 
 type Props = {
 
@@ -11,6 +20,7 @@ type State = {
     email: string,
     password: string
     error: Error,
+    direct: JSX.Element;
 }
 
 export default class LoginPage extends React.Component<Props, State> {
@@ -20,7 +30,8 @@ export default class LoginPage extends React.Component<Props, State> {
         this.state = {
             email: "",
             password: "",
-            error: new Error(),
+            error: new Error(ErrorLevel.WARNING, "Password are not encrypted. Please use with caution"),
+            direct: <div />
         }
 
         this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -29,16 +40,22 @@ export default class LoginPage extends React.Component<Props, State> {
     }
 
 
-    handleSubmit = (event: React.FormEvent) => {
+    handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
         if (this.state.email === "") { // TODO: Replace with email validation
             this.setState({ error: new Error(ErrorLevel.ERROR, "Invalid Email") });
         } else if (this.state.password === "") { // TODO: Replace with password validation
             this.setState({ error: new Error(ErrorLevel.ERROR, "Invalid Password") });
         } else {
-            this.setState({ error: new Error(ErrorLevel.WARNING, "Login Not Implemented") });
-            console.log(this.state.email + ":  " + this.state.password)
+            let res = await Axios.get(`http://localhost:3002/api/login/${this.state.email}/${this.state.password}`);
+            if (res.data.length === 1) {
+                setContext("currentAccount", new Account(this.state.email, this.state.password));
+                AccountStatus.updater();
+                this.setState({ direct: <Navigate to="/"></Navigate> })
+            } else {
+                this.setState({ error: new Error(ErrorLevel.WARNING, "Account Not Found") });
+            }
         }
-        event.preventDefault();
     }
 
     handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,6 +107,7 @@ export default class LoginPage extends React.Component<Props, State> {
 
                 </tbody>
             </table>
+            <>{this.state.direct}</>
         </div>);
     }
 }

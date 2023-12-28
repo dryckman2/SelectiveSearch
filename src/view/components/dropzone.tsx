@@ -24,7 +24,7 @@ function MyDropzone(props: Props) {
 
         }
         )
-    }, [])
+    }, [props])
     const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop })
 
     return (
