@@ -1,5 +1,6 @@
 export const ErrorLevel = {
     NONE: "None",
+    NOTICE: "Notice",
     WARNING: "Warning",
     ERROR: "Error"
 }

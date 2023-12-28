@@ -30,7 +30,7 @@ export default class LoginPage extends React.Component<Props, State> {
         this.state = {
             email: "",
             password: "",
-            error: new Error(ErrorLevel.WARNING, "Password are not encrypted. Please use with caution"),
+            error: new Error(ErrorLevel.NOTICE, "Password are not encrypted. Please use with caution"),
             direct: <div />
         }
 

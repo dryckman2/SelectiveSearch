@@ -22,6 +22,9 @@ export function ErrorMessage(props: Props) {
         case ErrorLevel.ERROR:
             color = "#d28282"; // Light Red
             break;
+        case ErrorLevel.NOTICE:
+            color = "#82afd2"; // Light Blue
+            break;
         default:
             break;
     }
