@@ -1,19 +1,39 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./index.css";
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+import Layout from "./view/layout";
+import Dataset from "./view/datasetPage";
+import WelcomePage from "./view/welcomePage";
+import Page from "./view/previousWork"
+import LoginPage from "./view/loginPage";
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+export let currentAccount = null;
+
+type Props = {
+
+}
+
+function App(props: Props) {
+  return (<div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<WelcomePage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="dataset" element={<Dataset />} />
+          <Route path="view" element={<Page />} />
+          {/* <Route path="*" element={<NoPage />} /> */}
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  </div>);
+}
+
+// ========================================
+
+const rootElement = document.getElementById('root');
+if (!rootElement) throw new Error('Failed to find the root element');
+const root = ReactDOM.createRoot(rootElement);
+root.render(<App />);
