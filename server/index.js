@@ -97,7 +97,7 @@ app.listen(PORT, () => {
     initializePrompt()
 })
 
-var inter = readline.createInterface({
+const inter = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
@@ -108,7 +108,6 @@ function initializePrompt() {
             db.end();
             inter.close();
             console.log("Server closed successfully")
-            return;
         }
     })
 }

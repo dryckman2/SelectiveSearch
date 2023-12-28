@@ -1,4 +1,4 @@
-module.exports = function override(config, env) {
+module.exports = function override(config) {
     // Add your overrides here
     config.resolve.fallback = {
         zlib: false,

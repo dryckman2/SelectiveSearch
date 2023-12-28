@@ -20,7 +20,7 @@ type State = {
     email: string,
     password: string
     error: Error,
-    direct: JSX.Element;
+    direct: React.ReactElement;
 }
 
 export default class LoginPage extends React.Component<Props, State> {
