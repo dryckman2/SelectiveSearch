@@ -16,8 +16,9 @@ app.use(cors());
 app.use(json())
 
 // Route to get all posts
-app.get("/api/get", (req, res) => {
-    db.query("SELECT * FROM Account", (err, result) => {
+app.get("/api/pingAccount/:username", (req, res) => {
+    const username = req.params.username
+    db.query("SELECT * FROM Account WHERE email = ?", [username], (err, result) => {
         if (err) {
             console.log(err)
             db.end();
@@ -37,6 +38,22 @@ app.get("/api/login/:username/:password", (req, res) => {
         res.send(result)
     });
 });
+
+
+app.post("/api/signup/:email/:password", (req, res) => {
+    const username = req.params.email
+    const password = req.params.password
+    if (username != undefined && password != undefined) {
+        db.query(`insert into Account(email,password) values (?,?)`, [username, password], (err, result) => {
+            if (err) {
+                console.log(err)
+                db.end();
+            }
+            res.send(result)
+        });
+    }
+});
+
 
 // // Route to get one post
 // app.get("/api/getFromId/:id", (req, res) => {

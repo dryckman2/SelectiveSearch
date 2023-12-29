@@ -8,6 +8,8 @@ import Dataset from "./view/datasetPage";
 import WelcomePage from "./view/welcomePage";
 import Page from "./view/previousWork"
 import LoginPage from "./view/loginPage";
+import AddDataSetPage from "./view/adddatasetpage";
+import AccountManagementPage from "./view/accountManagementPage"
 
 export class App extends React.Component {
 
@@ -19,7 +21,9 @@ export class App extends React.Component {
             <Route index element={<WelcomePage />} />
             <Route path="login" element={<LoginPage />} />
             <Route path="dataset" element={<Dataset />} />
-            <Route path="view" element={<Page />} />
+            <Route path="viewLiveSet" element={<Page />} />
+            <Route path="addDataSet" element={<AddDataSetPage />} />
+            <Route path="accountManagementPage" element={<AccountManagementPage />} />
             {/* <Route path="*" element={<NoPage />} /> */}
           </Route>
         </Routes>

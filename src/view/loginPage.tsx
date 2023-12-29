@@ -8,7 +8,7 @@ import Axios from 'axios'
 
 
 
-import { setContext } from '../globalcontext'
+import { setContext } from '../globalContext'
 import AccountStatus from './components/accountstatus';
 import { Navigate } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ type State = {
     email: string,
     password: string
     error: Error,
-    direct: React.ReactElement;
+    direct: React.ReactElement,
 }
 
 export default class LoginPage extends React.Component<Props, State> {
@@ -46,6 +46,7 @@ export default class LoginPage extends React.Component<Props, State> {
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.handleSignUp = this.handleSignUp.bind(this);
     }
 
 
@@ -53,17 +54,43 @@ export default class LoginPage extends React.Component<Props, State> {
         event.preventDefault();
         if (this.state.email === "") { // TODO: Replace with email validation
             this.setState({ error: new Error(ErrorLevel.ERROR, "Invalid Email") });
+            return;
         } else if (this.state.password === "") { // TODO: Replace with password validation
             this.setState({ error: new Error(ErrorLevel.ERROR, "Invalid Password") });
+            return;
+        }
+        let res = await Axios.get(`http://localhost:3002/api/login/${this.state.email}/${this.state.password}`);
+        if (res.data.length === 1) {
+            setContext("currentAccount", new Account(this.state.email, this.state.password));
+            AccountStatus.updater();
+            this.setState({ direct: <Navigate to="/accountManagementPage"></Navigate> })
         } else {
-            let res = await Axios.get(`http://localhost:3002/api/login/${this.state.email}/${this.state.password}`);
-            if (res.data.length === 1) {
+            this.setState({ error: new Error(ErrorLevel.WARNING, "Account Not Found") });
+        }
+
+    }
+
+    handleSignUp = async (event: React.FormEvent) => {
+        event.preventDefault();
+        if (this.state.email === "") { // TODO: Replace with email validation
+            this.setState({ error: new Error(ErrorLevel.ERROR, "Invalid Email") });
+            return;
+        } else if (this.state.password === "") { // TODO: Replace with password validation
+            this.setState({ error: new Error(ErrorLevel.ERROR, "Invalid Password") });
+            return;
+        }
+        let res = await Axios.get(`http://localhost:3002/api/pingAccount/${this.state.email}`);
+        if (res.data.length === 0) {
+            const res = await Axios.post(`http://localhost:3002/api/signup/${this.state.email}/${this.state.password}`);
+            if (res.status === 200) {
                 setContext("currentAccount", new Account(this.state.email, this.state.password));
                 AccountStatus.updater();
-                this.setState({ direct: <Navigate to="/"></Navigate> })
+                this.setState({ direct: <Navigate to="/accountManagementPage"></Navigate> })
             } else {
-                this.setState({ error: new Error(ErrorLevel.WARNING, "Account Not Found") });
+                this.setState({ error: new Error(ErrorLevel.ERROR, "Some Error Occurred: " + res.status) });
             }
+        } else {
+            this.setState({ error: new Error(ErrorLevel.ERROR, "Account Already Exists") });
         }
     }
 
@@ -110,6 +137,13 @@ export default class LoginPage extends React.Component<Props, State> {
                         <td colSpan={100} align='center' className='shadowless'>
                             <form onSubmit={this.handleSubmit} id="Submit">
                                 <input type="submit" value="Submit" />
+                            </form>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colSpan={100} align='center' className='shadowless'>
+                            <form onSubmit={this.handleSignUp} id="Sign Up">
+                                <input type="submit" value="Sign Up" />
                             </form>
                         </td>
                     </tr>

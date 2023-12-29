@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
-import { globalContext } from '../../globalcontext';
+import { globalContext } from '../../globalContext';
 
 type Props = {
 }
@@ -14,25 +14,17 @@ class AccountStatus extends React.Component {
         this.state = { display: "Sign In" };
 
         AccountStatus.updater = () => { super.forceUpdate() };
-        this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick() {
-        console.log("Clicked");
-        this.setState({ display: "Clicked" })
-        this.toLogin()
-    }
-
-    toLogin() {
-        // navigation.navigate('login')
-        console.log("To Login");
-    }
 
     render() {
         if (globalContext.currentAccount.email === "not_signed_in") {
-            return (<Link to="login">Sign In</Link>);
+            return (<td align="right"><Link to="login" className='layoutLinks'>Sign In</Link></td>);
         } else {
-            return (<div>{globalContext.currentAccount.email}</div>);
+            return (<>
+                <td align='right' width={"15%"} className='accountButtons'> <Link className="layoutLinks" to="/dataset">Manage Datasets</Link></td>
+                <td align='right' width={"3%"} className='accountButtons'><Link className="layoutLinks" to="/accountManagementPage">{globalContext.currentAccount.email}</Link></td>
+            </>);
         }
     }
 }

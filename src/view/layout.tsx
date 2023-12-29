@@ -10,10 +10,10 @@ class Layout extends React.Component {
                     <table width={"100%"}>
                         <tbody>
                             <tr>
-                                <td width={"55px"}><Link to="/">Home</Link></td>
-                                <td width={"130px"}><Link to="/dataset">Manage Datasets</Link></td>
-                                <td width={"150px"}><Link to="/view">View Set</Link></td>
-                                <td align="right"><AccountStatus /></td>
+                                <td width={"1%"} align="left" className="accountButtons"><Link className="layoutLinks" to="/">Home</Link></td>
+                                <td width={"10%"} align="left" className="accountButtons"><Link className="layoutLinks" to="/viewLiveSet">Live Set</Link></td>
+                                <td></td>
+                                <AccountStatus />
                             </tr>
                         </tbody>
                     </table>
