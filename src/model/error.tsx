@@ -1,3 +1,5 @@
+import React from "react";
+
 export const ErrorLevel = {
     NONE: "None",
     NOTICE: "Notice",

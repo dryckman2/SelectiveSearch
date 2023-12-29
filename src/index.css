@@ -3,7 +3,6 @@ body {
     margin: 0;
 }
 
-
 .spanningTable {
     border: 1px solid black;
     border-collapse: collapse;
@@ -17,10 +16,6 @@ body {
     padding: 5px 10px;
     color: white;
     tab-size: 4;
-}
-
-.seenTable {
-    border: 1px solid black;
 }
 
 table tr td {
@@ -41,12 +36,6 @@ div {
     padding-bottom: 10px;
 }
 
-.signIn {
-    color: white;
-    text-align: right;
-    background-color: black;
-    border: 0;
-}
 
 .layoutLinks:link {
     color: white;

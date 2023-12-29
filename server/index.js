@@ -43,7 +43,7 @@ app.get("/api/login/:username/:password", (req, res) => {
 app.post("/api/signup/:email/:password", (req, res) => {
     const username = req.params.email
     const password = req.params.password
-    if (username != undefined && password != undefined) {
+    if ((username !== undefined) && (password !== undefined)) {
         db.query(`insert into Account(email,password) values (?,?)`, [username, password], (err, result) => {
             if (err) {
                 console.log(err)

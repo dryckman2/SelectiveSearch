@@ -25,7 +25,7 @@ export default class Dataset extends React.Component {
                         </tr>
                         <tr>
                             <td colSpan={100} className="addButton" align="center">
-                                <Link to="/addDataSet" className="addButton"> Add Dateset </Link>
+                                <Link to="/addDataSet" className="addButton"> Add Dataset </Link>
                             </td>
                         </tr>
                     </tbody>
