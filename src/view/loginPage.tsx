@@ -13,7 +13,6 @@ import AccountStatus from './components/accountstatus';
 import { Navigate } from 'react-router-dom';
 
 type Props = {
-
 }
 
 type State = {
@@ -27,10 +26,20 @@ export default class LoginPage extends React.Component<Props, State> {
 
     constructor(props: Props) {
         super(props);
+        const startingError = new Error(ErrorLevel.NOTICE, "Password are not currently encrypted. Please use with caution");
+        startingError.forceFormat(
+            <>
+                <div>
+                    Password are not currently encrypted!
+                </div>
+                <div>
+                    Please use with caution
+                </div>
+            </>);
         this.state = {
             email: "",
             password: "",
-            error: new Error(ErrorLevel.NOTICE, "Password are not encrypted. Please use with caution"),
+            error: startingError,
             direct: <div />
         }
 

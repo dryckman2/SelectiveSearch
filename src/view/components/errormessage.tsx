@@ -28,6 +28,6 @@ export function ErrorMessage(props: Props) {
         default:
             break;
     }
-    return (<div className="errorMsg" style={{ backgroundColor: color }}>{error.level}: {error.message}</div>);
+    return (<div className="errorMsg" style={{ backgroundColor: color }}>{error.level}: {error.element}</div>);
 
 }
