@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { globalContext } from "../globalContext";
+import { notSignedInPlaceHolder, globalContext } from "../globalContext";
 
 export default class Dataset extends React.Component {
     render() {
-        if (globalContext.currentAccount.email === "not_signed_in") {
+        if (globalContext.currentAccount === notSignedInPlaceHolder) {
             return <>Must sign in to view Datasets</>;
         }
         return (

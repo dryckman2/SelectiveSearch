@@ -54,6 +54,20 @@ app.post("/api/signup/:email/:password", (req, res) => {
     }
 });
 
+app.delete("/api/deleteAccount/:email/:password", (req, res) => {
+    const username = req.params.email
+    const password = req.params.password
+    if ((username !== undefined) && (password !== undefined)) {
+        db.query(`delete from Account where accountId = (select accountId from Account where email = ? and password = ?)`, [username, password], (err, result) => {
+            if (err) {
+                console.log(err)
+                db.end();
+            }
+            res.send(result)
+        });
+    }
+});
+
 
 // // Route to get one post
 // app.get("/api/getFromId/:id", (req, res) => {

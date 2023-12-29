@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Link } from 'react-router-dom';
-import { globalContext } from '../../globalContext';
+import { notSignedInPlaceHolder, globalContext } from '../../globalContext';
 
 type Props = {
 }
@@ -18,7 +18,7 @@ class AccountStatus extends React.Component {
 
 
     render() {
-        if (globalContext.currentAccount.email === "not_signed_in") {
+        if (globalContext.currentAccount === notSignedInPlaceHolder) {
             return (<td align="right"><Link to="login" className='layoutLinks'>Sign In</Link></td>);
         } else {
             return (<>
