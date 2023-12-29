@@ -1,4 +1,4 @@
-import SSFile from "../view/ssfile";
+import SSFile from "../view/components/ssfile";
 import React from 'react';
 
 class HeldFile {

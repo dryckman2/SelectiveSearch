@@ -109,10 +109,12 @@ app.post("/api/signup/:email/:password", (req, res) => {
 // })
 
 
-app.listen(PORT, () => {
+let server = app.listen(PORT, () => {
     console.log(`Server is running on ${PORT}`)
     initializePrompt()
 })
+
+server.timeout = 10000
 
 const inter = readline.createInterface({
     input: process.stdin,
