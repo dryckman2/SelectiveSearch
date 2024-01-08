@@ -15,7 +15,6 @@ const PORT = 3002;
 app.use(cors());
 app.use(json())
 
-// Route to get all posts
 app.get("/api/pingAccount/:username", (req, res) => {
     const username = req.params.username
     db.query("SELECT * FROM Account WHERE email = ?", [username], (err, result) => {
@@ -67,6 +66,19 @@ app.delete("/api/deleteAccount/:email/:password", (req, res) => {
         });
     }
 });
+
+
+app.get("/api/getFiles/:id", (req, res) => {
+    const id = req.params.id
+    db.query("SELECT * FROM File WHERE File.datasetId = ?", [id], (err, result) => {
+        if (err) {
+            console.log(err)
+            db.end();
+        }
+        res.send(result)
+    });
+});
+
 
 
 // // Route to get one post
