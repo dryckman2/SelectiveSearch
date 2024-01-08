@@ -8,7 +8,7 @@ import Axios from 'axios'
 
 
 
-import { setContext } from '../globalContext'
+import { setContext } from '../globalcontext'
 import AccountStatus from './components/accountstatus';
 import { Navigate } from 'react-router-dom';
 

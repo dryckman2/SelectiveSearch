@@ -8,7 +8,7 @@ import Dataset from "./view/datasetPage";
 import WelcomePage from "./view/welcomePage";
 import Page from "./view/previousWork"
 import LoginPage from "./view/loginPage";
-import AddDataSetPage from "./view/addDatasetPage";
+import AddDataSetPage from "./view/adddatasetpage";
 import AccountManagementPage from "./view/accountManagementPage"
 import ViewDataSetPage from "./view/viewDataSetPage";
 

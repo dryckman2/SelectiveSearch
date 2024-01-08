@@ -1,5 +1,5 @@
 import React from "react";
-import { notSignedInPlaceHolder, globalContext, setContext } from "../globalContext";
+import { notSignedInPlaceHolder, globalContext, setContext } from "../globalcontext";
 import AccountStatus from "./components/accountstatus";
 
 import { Navigate } from 'react-router-dom';

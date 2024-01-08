@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { notSignedInPlaceHolder, globalContext } from "../globalContext";
+import { notSignedInPlaceHolder, globalContext } from "../globalcontext";
 
 export default class Dataset extends React.Component {
     render() {
